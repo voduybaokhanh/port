@@ -1,0 +1,284 @@
+<!doctype html>
+<!--
+THESIS: A portfolio that is itself a running pipeline. Refuses the hero + card-grid template; the first thing you see is the work doing its job.
+OWN-WORLD: Ink-black control room, bone text, one vermilion signal colour for "data in flight". Edges, pulses, run-log lines, flow steps. Contact section drenched in the signal colour.
+STORY: Visitor sees live system graph -> learns this person runs 29 production workflows -> opens the case studies -> believes the depth -> emails.
+FIRST VIEWPORT: Left, huge name + one-line promise + two actions. Right, animated n8n-style node graph with pulses. Bottom, a sample run-log ticker.
+FORM: Experience mode, single scroll page, tabbed case studies, no build step.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vo Duy Bao Khanh — Full-Stack &amp; AI Automation Engineer</title>
+  <meta name="description" content="Full-Stack Developer and AI Automation Engineer. 29 production n8n workflows, PostgreSQL distributed locks, zero-downtime ETL, multi-agent chatbots on Zalo OA.">
+  <meta name="theme-color" content="#0b0c10">
+  <meta property="og:title" content="Vo Duy Bao Khanh — Full-Stack & AI Automation Engineer">
+  <meta property="og:description" content="Automation that keeps running while everyone sleeps: n8n, PostgreSQL, multi-agent AI, Docker.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0c10'/%3E%3Ccircle cx='9' cy='16' r='3.5' fill='%23ff5a36'/%3E%3Ccircle cx='23' cy='9' r='3' fill='%23ece9e1'/%3E%3Ccircle cx='23' cy='23' r='3' fill='%23ece9e1'/%3E%3Cpath d='M12 15l8-5M12 17l8 5' stroke='%23ece9e1' stroke-width='1.5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/vi.js" defer></script>
+  <script src="assets/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#systems">Skip to case studies</a>
+
+  <header class="nav" id="top">
+    <a class="nav__logo" href="#top" aria-label="Vo Duy Bao Khanh, back to top">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor" opacity=".08"/><circle cx="9" cy="16" r="3.5" fill="var(--signal)"/><circle cx="23" cy="9" r="3" fill="currentColor"/><circle cx="23" cy="23" r="3" fill="currentColor"/><path d="M12 15l8-5M12 17l8 5" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>Khanh</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#systems">Systems</a>
+      <a href="#tools">Tools</a>
+      <a href="#experience">Experience</a>
+      <a href="#stack">Stack</a>
+    </nav>
+    <div class="nav__end">
+      <button type="button" class="lang" id="lang" aria-label="Switch language / Đổi ngôn ngữ"><span data-l="en">EN</span><span data-l="vi">VI</span></button>
+      <a class="btn btn--small" href="mailto:khanhvo908@gmail.com">Say hello</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas id="graph" class="hero__graph" aria-hidden="true"></canvas>
+      <div class="hero__copy wrap">
+        <p class="hero__role">Full-Stack Developer &amp; AI Automation Engineer · Ho Chi Minh City</p>
+        <h1 id="hero-title">Vo Duy<br>Bao Khanh</h1>
+        <p class="hero__lede">I build automation that keeps working while everyone sleeps: 29 production workflows, multi-agent chatbots, and the plumbing that makes them safe to trust.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#systems">See the systems</a>
+          <a class="btn btn--ghost" href="https://github.com/voduybaokhanh" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="hero__log wrap" aria-label="Sample run log, illustrative">
+        <p class="hero__logtitle">Sample run log · illustrative</p>
+        <ol id="runlog" class="runlog">
+          <li><span class="ok">✓</span> zalo.webhook <b>3 msgs merged</b> → 1 LLM call</li>
+          <li><span class="ok">✓</span> etl.sheets→pg <b>8 catalogs</b> swapped, 0 s downtime</li>
+          <li><span class="ok">✓</span> order.alert <b>idempotent</b> ON CONFLICT DO NOTHING</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FACT STRIP -->
+    <section class="facts wrap" aria-label="At a glance">
+      <p><strong>4+ years</strong> shipping production software</p>
+      <p><strong>29</strong> active n8n workflows, 500+ nodes</p>
+      <p><strong>500+</strong> customer messages a day handled by AI agents</p>
+      <p><strong>~60%</strong> LLM token cost cut by debouncing</p>
+    </section>
+
+    <!-- SYSTEMS -->
+    <section class="systems wrap" id="systems" aria-labelledby="systems-title">
+      <header class="section-head">
+        <h2 id="systems-title">Systems that run on their own</h2>
+        <p>Five pieces of the Nava Store &amp; NavaTek automation stack. Pick one to see the problem, the mechanism, and what changed.</p>
+      </header>
+
+      <div class="systems__body">
+        <div class="tabs" role="tablist" aria-label="Case studies" aria-orientation="vertical">
+          <button class="tab" role="tab" id="tab-chat" aria-controls="panel-chat" aria-selected="true">
+            <span class="tab__name">Zalo multi-agent chatbot</span><span class="tab__meta">120 nodes · Gemini · LangChain</span>
+          </button>
+          <button class="tab" role="tab" id="tab-orders" aria-controls="panel-orders" aria-selected="false" tabindex="-1">
+            <span class="tab__name">Omnichannel order pipeline</span><span class="tab__meta">81 nodes · Sapo · Lark</span>
+          </button>
+          <button class="tab" role="tab" id="tab-etl" aria-controls="panel-etl" aria-selected="false" tabindex="-1">
+            <span class="tab__name">Zero-downtime ETL</span><span class="tab__meta">Sheets → PostgreSQL</span>
+          </button>
+          <button class="tab" role="tab" id="tab-infra" aria-controls="panel-infra" aria-selected="false" tabindex="-1">
+            <span class="tab__name">24/7 job infrastructure</span><span class="tab__meta">Ofelia · OliveTin · Cloudflare</span>
+          </button>
+          <button class="tab" role="tab" id="tab-rag" aria-controls="panel-rag" aria-selected="false" tabindex="-1">
+            <span class="tab__name">Permission-aware hybrid RAG</span><span class="tab__meta">vector + full-text · ltree · reranker</span>
+          </button>
+        </div>
+
+        <div class="panels">
+          <!-- chat -->
+          <article class="panel" role="tabpanel" id="panel-chat" aria-labelledby="tab-chat">
+            <h3>Customers type in bursts. The bot answers once.</h3>
+            <p class="panel__lede">A three-stage multi-agent assistant on Zalo OA that quotes real prices from the database, routes VAT and warranty, and steps aside the moment a human joins.</p>
+            <ol class="flow" style="--n:8" aria-label="Message flow">
+              <li style="--i:0">Zalo webhook</li><li style="--i:1">Dedupe</li><li style="--i:2">Lock + JSONB buffer</li><li style="--i:3">Grace wait</li>
+              <li style="--i:4">Merge text</li><li style="--i:5">Classify intent</li><li style="--i:6">Agent A · B · C</li><li style="--i:7">Reply or hand off</li>
+            </ol>
+            <dl class="story">
+              <div><dt>Problem</dt><dd>Webhooks fire per message. Four short texts meant four parallel runs, four LLM bills, and answers that talked over each other.</dd></div>
+              <div><dt>Mechanism</dt><dd>A PostgreSQL row is the distributed lock. Messages that arrive while it is held go into a JSONB buffer, merge after a quiet period, and reach the model once. Agent A finds the need, B quotes from live DB tools, C closes the order. A <code>[STAGE:x]</code> marker moves the conversation between them.</dd></div>
+              <div><dt>Outcome</dt><dd>About 60% fewer tokens, no overlapping replies, 500+ messages a day. Staff replies are detected and mute the bot instantly.</dd></div>
+            </dl>
+            <ul class="tags"><li>n8n</li><li>PostgreSQL</li><li>Gemini Pro/Flash</li><li>Gemini Vision</li><li>LangChain</li><li>Zalo OA</li><li>Lark</li></ul>
+          </article>
+
+          <!-- orders -->
+          <article class="panel" role="tabpanel" id="panel-orders" aria-labelledby="tab-orders" hidden>
+            <h3>One order, one alert. Even when the webhook fires three times.</h3>
+            <p class="panel__lede">Orders from Shopee, TikTok Shop, Lazada and the web storefront land in one event-driven router that tells the warehouse what to pack and when.</p>
+            <ol class="flow" style="--n:7" aria-label="Order flow">
+              <li style="--i:0">Sapo webhook</li><li style="--i:1">Express order?</li><li style="--i:2">INSERT … ON CONFLICT</li><li style="--i:3">Working hours?</li>
+              <li style="--i:4">Lark card now</li><li style="--i:5">Or night queue</li><li style="--i:6">08:00 digest</li>
+            </ol>
+            <dl class="story">
+              <div><dt>Problem</dt><dd>Providers retry webhooks, delete them without warning, and an order can turn into an express order after the first alert went out.</dd></div>
+              <div><dt>Mechanism</dt><dd><code>ON CONFLICT DO NOTHING RETURNING</code> makes alerts idempotent at the database. The Lark card id is stored, so a normal order that becomes express is edited in place into a red alert instead of spawning a second message. Every 6 hours the workflow audits Sapo webhooks and re-registers missing ones; every 10 minutes it reconciles web orders against the ERP.</dd></div>
+              <div><dt>Outcome</dt><dd>Zero duplicate notifications, orders that fail to reach the ERP are flagged within minutes, and night orders arrive as one 08:00 digest instead of waking anyone.</dd></div>
+            </dl>
+            <ul class="tags"><li>n8n</li><li>PostgreSQL</li><li>Sapo GO / Web</li><li>Shopee</li><li>TikTok Shop</li><li>Lark cards</li></ul>
+          </article>
+
+          <!-- etl -->
+          <article class="panel" role="tabpanel" id="panel-etl" aria-labelledby="tab-etl" hidden>
+            <h3>The bot never sees an empty table.</h3>
+            <p class="panel__lede">Sales edit prices in Google Sheets all day. The chatbot reads them from PostgreSQL. Between the two sits a Blue/Green swap.</p>
+            <ol class="flow" style="--n:6" aria-label="ETL flow">
+              <li style="--i:0">Read 8 sheets</li><li style="--i:1">Normalise + slug</li><li style="--i:2">Load stage tables</li><li style="--i:3">Assert rows &gt; 0</li>
+              <li style="--i:4">Atomic swap</li><li style="--i:5">Live, 0 s gap</li>
+            </ol>
+            <dl class="story">
+              <div><dt>Problem</dt><dd>DELETE then INSERT on the live table leaves a window where a failed sheet read means an empty catalogue and a chatbot that lies.</dd></div>
+              <div><dt>Mechanism</dt><dd>Data loads into <code>products_stage</code> and <code>lap_may_stage</code>. An assertion raises an exception if a stage table is empty, which rolls the transaction back. Only then do the tables swap atomically.</dd></div>
+              <div><dt>Outcome</dt><dd>8 catalogs sync every 2.5 hours with integrity checks, and the chatbot's data is never partial.</dd></div>
+            </dl>
+            <ul class="tags"><li>PostgreSQL</li><li>PL/pgSQL</li><li>Google Sheets</li><li>n8n</li></ul>
+          </article>
+
+          <!-- infra -->
+          <article class="panel" role="tabpanel" id="panel-infra" aria-labelledby="tab-infra" hidden>
+            <h3>A cron server that wakes itself up and catches up.</h3>
+            <p class="panel__lede">Four times a day a Dockerised chain moves data from Sapo to Google Sheets, Zalo and Shopee. If the machine slept or the clock drifted, it notices and runs what it missed.</p>
+            <ol class="flow" style="--n:7" aria-label="Sync chain">
+              <li style="--i:0">Ofelia cron</li><li style="--i:1">Sapo export</li><li style="--i:2">Google Sheets</li><li style="--i:3">Price calc</li>
+              <li style="--i:4">Zalo sheets</li><li style="--i:5">Shopee sync</li><li style="--i:6">Push to backup host</li>
+            </ol>
+            <dl class="story">
+              <div><dt>Problem</dt><dd>Cron in Docker only runs when Docker is up, and Docker only runs when someone is logged in. WSL clocks drift while a machine idles and jobs fire late.</dd></div>
+              <div><dt>Mechanism</dt><dd>Auto-login, active hours and sleep schedules keep the host awake. A WSL time-sync task runs every 15 minutes. A catch-up script re-triggers missed jobs. A failed step stops the chain but still ships finished files. OliveTin gives staff a one-click dashboard; Cloudflare Tunnel exposes internal tools safely.</dd></div>
+              <div><dt>Outcome</dt><dd>A 4x/day chain that heals itself and that non-engineers can trigger from a browser.</dd></div>
+            </dl>
+            <ul class="tags"><li>Docker</li><li>Ofelia</li><li>OliveTin</li><li>Cloudflare Tunnel</li><li>Playwright</li><li>Sapo API</li></ul>
+          </article>
+
+          <!-- rag -->
+          <article class="panel" role="tabpanel" id="panel-rag" aria-labelledby="tab-rag" hidden>
+            <h3>An internal assistant that cannot leak what you may not read.</h3>
+            <p class="panel__lede">An Obsidian-style knowledge base with a RAG assistant. Answers cite their sources, and permissions are enforced before retrieval, not after.</p>
+            <ol class="flow" style="--n:6" aria-label="Retrieval flow">
+              <li style="--i:0">Expand query (6 turns)</li><li style="--i:1">Vector 1024-d</li><li style="--i:2">Full-text unaccent</li><li style="--i:3">RRF merge</li>
+              <li style="--i:4">bge-reranker top 6</li><li style="--i:5">Cited answer</li>
+            </ol>
+            <dl class="story">
+              <div><dt>Problem</dt><dd>Hybrid search finds the right document, including ones the asker must never see.</dd></div>
+              <div><dt>Mechanism</dt><dd>Folder RBAC and ACL on PostgreSQL <code>ltree</code> with inheritance, DENY-first, personal rules over department rules. Restricted documents vanish from the tree and from retrieval. Clicking a citation opens the source with the cited passage highlighted.</dd></div>
+              <div><dt>Outcome</dt><dd>One assistant for the whole company where access control is a property of the data, not of the prompt.</dd></div>
+            </dl>
+            <ul class="tags"><li>Python</li><li>PostgreSQL</li><li>ltree</li><li>Next.js</li><li>bge-reranker-v2-m3</li><li>RRF</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="tools wrap" id="tools" aria-labelledby="tools-title">
+      <header class="section-head">
+        <h2 id="tools-title">Tools people use every day</h2>
+        <p>Internal full-stack apps that replaced spreadsheets, manual clicks and guesswork.</p>
+      </header>
+      <ul class="rows">
+        <li><h3>Banner Studio</h3><p>1024×1024 Shopee covers from a product photo. RMBG-1.4 background removal and LaMa inpainting in worker threads, warranty-badge template matching, Excel batch to ZIP.</p><span>NestJS · Next.js 15 · ONNX</span></li>
+        <li><h3>Metadata Tool</h3><p>Batch image metadata scrubbing that never uploads a byte: 8-thread queue, EXIF/IPTC/XMP editing, export straight to a folder.</p><span>TypeScript · Web Worker · ExifTool WASM</span></li>
+        <li><h3>Warehouse scan console</h3><p>Barcode, DataMatrix and OCR label scanning, packing video capture, 50×20 mm QR labels, and stocktaking with atomic serial rollback.</p><span>Express 5 · Flask · PostgreSQL</span></li>
+        <li><h3>Price watch &amp; pricing matrix</h3><p>Competitor price crawler with change alerts, plus a multi-channel pricing matrix that blocks sell prices under the floor.</p><span>Playwright · Cheerio · Streamlit</span></li>
+        <li><h3>NameSEO</h3><p>Rewrites marketplace product titles to a 110–120 character formula with Gemini, validates the result, and asks for a fix up to twice before flagging it for a human.</p><span>Next.js · Gemini</span></li>
+        <li><h3>Theme Sync extension</h3><p>Pushes local theme edits to the Sapo Web Admin API every 2 s, with conflict detection and a hard refusal to publish an empty file.</p><span>Chrome Extension · Sapo Liquid</span></li>
+        <li><h3>Quote PDF daemon</h3><p>Polls Lark every 20 s, renders the quotation and handover PDFs, and attaches them back to the record.</p><span>Python · WeasyPrint · Lark API</span></li>
+        <li><h3>AI product search &amp; warranty lookup</h3><p>Gemini-powered storefront search and a rate-limited, data-masking warranty proxy for navatek.vn and navastore.vn.</p><span>PHP · Sapo V2 · Gemini</span></li>
+      </ul>
+    </section>
+
+    <!-- OPEN SOURCE -->
+    <section class="repos wrap" aria-labelledby="repos-title">
+      <header class="section-head">
+        <h2 id="repos-title">Public on GitHub</h2>
+        <p>The production systems above are private. These are open.</p>
+      </header>
+      <ul class="repolist">
+        <li><a href="https://github.com/voduybaokhanh/unified-customer-platform" rel="noopener"><b>unified-customer-platform</b><span>CRM, real-time live chat and help-desk ticketing behind modular JWT + RBAC REST APIs.</span><i>TypeScript</i></a></li>
+        <li><a href="https://github.com/voduybaokhanh/booking_concurrency" rel="noopener"><b>booking_concurrency</b><span>Booking engine that prevents overbooking under load with transactions and application-level locking.</span><i>TypeScript</i></a></li>
+        <li><a href="https://github.com/voduybaokhanh/go-job-queue" rel="noopener"><b>go-job-queue</b><span>Job queue in Go.</span><i>Go</i></a></li>
+        <li><a href="https://github.com/voduybaokhanh/fnb-inventory-system" rel="noopener"><b>fnb-inventory-system</b><span>F&amp;B warehouse inventory system.</span><i>TypeScript</i></a></li>
+        <li><a href="https://github.com/voduybaokhanh/pikeball" rel="noopener"><b>pikeball</b><span>Pickleball court booking.</span><i>TypeScript</i></a></li>
+        <li><a href="https://github.com/voduybaokhanh/go-url-shortener" rel="noopener"><b>go-url-shortener</b><span>URL shortener in Go.</span><i>Go</i></a></li>
+      </ul>
+      <p class="repos__more"><a href="https://github.com/voduybaokhanh?tab=repositories" rel="noopener">All repositories →</a></p>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="exp wrap" id="experience" aria-labelledby="exp-title">
+      <header class="section-head"><h2 id="exp-title">Where I have done it</h2></header>
+      <ol class="timeline">
+        <li>
+          <time>Jan 2026 – now</time>
+          <div><h3>Nava Store &amp; NavaTek</h3><p class="role">Full-Stack &amp; AI Automation Engineer</p>
+          <p>Architected the whole automation ecosystem: 29 active n8n workflows (500+ nodes) on self-hosted Docker, joining Sapo ERP, Zalo OA, Lark, Shopee, TikTok Shop and PostgreSQL. Manage OAuth2 token lifecycles with rotating refresh tokens and IP-whitelisted calls. Ship internal apps across Node.js, Next.js, NestJS and Flask.</p></div>
+        </li>
+        <li>
+          <time>Aug – Dec 2025</time>
+          <div><h3>Ape Tech Solutions</h3><p class="role">Full-Stack Developer</p>
+          <p>Mobile and backend features for pickleball booking and F&amp;B warehouse systems in React Native, Flutter, NestJS and PostgreSQL. Cut query latency with schema work and Redis caching; refactored legacy Flutter state management.</p></div>
+        </li>
+        <li>
+          <time>Jan 2024 – Jan 2025</time>
+          <div><h3>BIT Group</h3><p class="role">Backend Developer</p>
+          <p>Go and MySQL REST APIs integrated with Lark for time-tracking and HR automation. Rebuilt legacy endpoints with JWT and role-based access control.</p></div>
+        </li>
+        <li>
+          <time>Jan 2022 – now</time>
+          <div><h3>Freelance</h3><p class="role">Mobile &amp; Web Developer</p>
+          <p>Custom apps for small businesses in Go, Kotlin, ReactJS, PHP and MySQL, from architecture to Docker deployment, with ZaloPay, Firebase and Haravan integrations.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- STACK -->
+    <section class="stack wrap" id="stack" aria-labelledby="stack-title">
+      <header class="section-head"><h2 id="stack-title">Toolbox</h2></header>
+      <dl class="stackgrid">
+        <div><dt>Languages</dt><dd>TypeScript · JavaScript · Python · Go · SQL (PL/pgSQL) · PHP · Kotlin · HTML/CSS</dd></div>
+        <div><dt>Frameworks &amp; AI</dt><dd>Node.js · NestJS · Next.js · Express · Flask · Streamlit · React · React Native · Flutter · LangChain · Gemini API · RAG · ONNX</dd></div>
+        <div><dt>Automation &amp; APIs</dt><dd>n8n · Playwright · Zalo OA · Lark Suite · Sapo Omni/GO/Web · Shopee &amp; TikTok Shop APIs · Apps Script</dd></div>
+        <div><dt>Data &amp; DevOps</dt><dd>PostgreSQL (JSONB, ltree, pg_trgm) · MySQL · Redis · SQLite · Docker · Ofelia · OliveTin · Nginx / Caddy · Cloudflare Tunnel</dd></div>
+      </dl>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 id="contact-title">Have something that should run itself?</h2>
+        <a class="contact__mail" href="mailto:khanhvo908@gmail.com">khanhvo908@gmail.com</a>
+        <p class="contact__links">
+          <a href="https://github.com/voduybaokhanh" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/vdbkhanh" rel="noopener">LinkedIn</a>
+          <span>Ho Chi Minh City</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot wrap">
+    <p>© 2026 Vo Duy Bao Khanh</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+</body>
+</html>

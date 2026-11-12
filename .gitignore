@@ -1,0 +1,3 @@
+# repowise API keys (local)
+.repowise/.env
+/.repowise
