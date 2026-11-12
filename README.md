@@ -35,4 +35,4 @@ python -m http.server 8765   # rồi mở http://localhost:8765
 ## Deploy
 
 Bất kỳ host tĩnh nào (GitHub Pages, Cloudflare Pages). Thư mục gốc là `/`.
-Ảnh chia sẻ là `assets/og.png` (1200×630, chụp từ hero). Thẻ `og:image` đang là đường dẫn tương đối; sau khi có domain thật phải đổi thành URL tuyệt đối, nếu không Facebook/Zalo/LinkedIn không hiện ảnh.
+Ảnh chia sẻ là `assets/og.png` (1200×630, chụp từ hero). Thẻ `og:image` dùng URL tuyệt đối `https://khanhvo908.xyz/assets/og.png`; đổi domain thì phải sửa thẻ này và file `CNAME` (GitHub Pages đọc domain từ file đó).
